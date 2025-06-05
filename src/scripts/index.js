@@ -7,14 +7,14 @@ const cardsList = document.querySelector('.places__list');
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
 
-const popup = document.querySelectorAll('.popup');
+const popupList = document.querySelectorAll('.popup');
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const popupEdit = document.querySelector('.popup_type_edit');
 
-const formElement = document.querySelector('.popup__form');
+const editForm = document.querySelector('.popup__form');
 
-const nameInput = formElement.querySelector('.popup__input_type_name');
-const jobInput = formElement.querySelector('.popup__input_type_description');
+const nameInput = editForm.querySelector('.popup__input_type_name');
+const jobInput = editForm.querySelector('.popup__input_type_description');
 
 const addForm = document.querySelector('.popup_type_new-card .popup__form');
 
@@ -25,7 +25,7 @@ const cardNameInput = addForm.querySelector('.popup__input_type_card-name');
 const urlInput = addForm.querySelector('.popup__input_type_url');
 
 // @todo: Функция добавления карточки
-function addCard(initialCards) {
+function addCards(initialCards) {
   initialCards.forEach(function(item) { 
     const cardItem = createCard(item, cardDelete, cardLike, imageClick);
     cardsList.append(cardItem);
@@ -33,7 +33,7 @@ function addCard(initialCards) {
 }
 
 // @todo: Вывести карточки на страницу
-addCard(initialCards);
+addCards(initialCards);
 
 // @todo: Обработка нажатий кнопок
 addButton.addEventListener('click', function() {
@@ -48,12 +48,13 @@ editButton.addEventListener('click', function() {
   modalOpen(popupEdit);
 })
 
-popup.forEach(function(popup)  {
+popupList.forEach(function(popup)  {
+  popup.classList.add('popup_is-animated');
   eventListener(popup);
 });
 
 // @todo: Отправка форм
-function handleFormSubmit(evt) {
+function editProfile(evt) {
     evt.preventDefault();
     const name = nameInput.value;
     const job = jobInput.value; 
@@ -62,7 +63,7 @@ function handleFormSubmit(evt) {
     modalClose(popupEdit);
 
 }
-formElement.addEventListener('submit', handleFormSubmit);
+editForm.addEventListener('submit', editProfile);
 
 function addNewCard(evt) {
   evt.preventDefault();
@@ -88,5 +89,3 @@ function imageClick(item) {
   image.alt = item.name;
   modalOpen(popupImage);
 }
-
-// @todo: Плавность попапов
