@@ -27,8 +27,8 @@ function showInputError(formElement, inputElement, validationMessage, config) { 
 function hideInputError(formElement, inputElement, config) {                      // Скрыть ошибку ввода
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(config.inputErrorClass);
-  inputElement.setCustomValidity("");
-  errorElement.setCustomValidity = '';
+  inputElement.setCustomValidity('');
+  errorElement.textContent = '';
   errorElement.classList.remove(config.errorClass);
 };
 
