@@ -30,8 +30,12 @@ const popupList = document.querySelectorAll('.popup');
 const popupNewCard = document.querySelector('.popup_type_new-card');
 const popupEdit = document.querySelector('.popup_type_edit');
 const popupAvatar = document.querySelector('.popup_type_edit_image');
+const popupFullImage = document.querySelector('.popup_type_image');
 
-const editForm = document.querySelector('.popup__form');
+const captionPhotoPopupFullImage = popupFullImage.querySelector('.popup__caption');
+const photoPopupFullImage = popupFullImage.querySelector('.popup__image');  
+
+const editForm = document.querySelector('.popup_type_edit .popup__form');
 
 const nameInput = editForm.querySelector('.popup__input_type_name');
 const jobInput = editForm.querySelector('.popup__input_type_description');
@@ -56,7 +60,8 @@ Promise.all([getUserInfo(), getInitialCards()])
       profileTitle.textContent = userData.name;
       profileDescription.textContent = userData.about;
       profileImage.style.backgroundImage = `url(${userData.avatar})`;
-    });
+    })
+    .catch(err => console.log(`Ошибка: ${err}`));
 
 // @todo: Функция добавления карточки
 function addCards(initialCards, userId) {
@@ -103,7 +108,7 @@ function editProfile(evt) {
       .then((data) => {
         profileTitle.textContent = data.name;
         profileDescription.textContent = data.about;
-      modalClose(popupEdit);
+        modalClose(popupEdit);
       })
       .catch((err) => {
           console.log('Ошибка:', err);
@@ -120,19 +125,19 @@ function addNewCard(evt) {
   const name = cardNameInput.value;
   const link = urlInput.value;
   addCard(name, link)
-  .then((data) => {
-    const card = createCard(data, cardDelete, cardLike, imageClick, userId);
-    cardsList.prepend(card); 
-    modalClose(popupNewCard);
-    cardNameInput.value = '';
-    urlInput.value = '';  
-  })
-  .catch((err) => {
-      console.log('Ошибка:', err);
-  })
-  .finally(() => {
-    loading(false, addForm)
-  });
+    .then((data) => {
+      const card = createCard(data, cardDelete, cardLike, imageClick, userId);
+      cardsList.prepend(card); 
+      modalClose(popupNewCard);
+      cardNameInput.value = '';
+      urlInput.value = '';  
+    })
+    .catch((err) => {
+        console.log('Ошибка:', err);
+    })
+    .finally(() => {
+      loading(false, addForm)
+    });
 };
 addForm.addEventListener('submit', addNewCard);
 
@@ -159,13 +164,10 @@ editImageForm.addEventListener('submit', editAvatar);
 
 // @todo: Попап по клику на карточку
 function imageClick(item) {
-  const popupImage = document.querySelector('.popup_type_image');
-  const popupCaption = popupImage.querySelector('.popup__caption');
-  const image = popupImage.querySelector('.popup__image');  
-  popupCaption.textContent = item.name; 
-  image.src = item.link; 
-  image.alt = item.name;
-  modalOpen(popupImage);
+  captionPhotoPopupFullImage.textContent = item.name; 
+  photoPopupFullImage.src = item.link; 
+  photoPopupFullImage.alt = item.name;
+  modalOpen(popupFullImage);
 };
 
 // @todo: Состояние загрузки формы
