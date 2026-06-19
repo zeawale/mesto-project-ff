@@ -10,6 +10,8 @@
 ![HTML5](https://img.shields.io/badge/HTML5-1e1e2e?style=for-the-badge&logo=html5&logoColor=a6e3a1)
 ![CSS3](https://img.shields.io/badge/CSS3-1e1e2e?style=for-the-badge&logo=css3&logoColor=a6e3a1)
 
+[![Figma](https://img.shields.io/badge/Figma_Design-1e1e2e?style=for-the-badge&logo=figma&logoColor=a6e3a1)](https://www.figma.com/design/PSdQFRHoxXJFs2FH8IXViF/)
+
 **[→ Live Demo](https://zeawale.github.io/mesto-project-ff/)**
 
 </div>
